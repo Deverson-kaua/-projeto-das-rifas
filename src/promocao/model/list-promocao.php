@@ -11,7 +11,7 @@
     $colunas = $requestData['columns'];
 
     //Preparar o comando sql para obter os dados da categoria
-    $sql = "SELECT ID, NOME, CELULAR FROM PROMOCAO WHERE 1=1 ";
+    $sql = "SELECT ID, TITULO, DESCRICAO, DATA_INICIO, DATA_FIM, DATA_SORTEIO, ARRECADACAO, VALOR_RIFA  FROM PROMOCAO WHERE 1=1 ";
 
     //Obter o total de registros cadastrados
     $resultado = $pdo->query($sql);
@@ -23,8 +23,9 @@
         //Montar a expressão lógica que irá compor os filtros
         //Aqui você deverá determinar quais colunas farão parte do filtro
         $sql .= " AND (ID LIKE '$filtro%' ";
-        $sql .= " OR NOME LIKE '$filtro%') ";
-        $sql .= " OR CELULAR LIKE '$filtro%') ";
+        $sql .= " OR TITULO LIKE '$filtro%') ";
+        
+
     }
     
     //Obter o total dos dados filtrados
@@ -33,7 +34,7 @@
     
     //Obter valores para ORDER BY      
     $colunaOrdem = $requestData['order'][0]['column']; //Obtém a posição da coluna na ordenação
-    $ordem = $colunas[$colunaOrdem]['data']; //Obtém o nome da coluna para a ordenação
+    $ordem = $colunas[$colunaOrdem]['data']; //Obtém o TÍTULO da coluna para a ordenação
     $direcao = $requestData['order'][0]['dir']; //Obtém a direção da ordenação
     
     //Obter valores para o LIMIT
